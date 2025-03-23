@@ -1,0 +1,57 @@
+.container-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+
+  .login {
+    height: 450px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    //   justify-content: center;
+    align-items: center;
+    .title-login {
+      font-size: 30px;
+      font-weight: 600;
+      padding: 60px 0 30px 0;
+      color: rgb(137, 205, 250);
+    }
+    .content-login {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      .form-login {
+        input {
+          display: block; /* Mỗi input chiếm toàn bộ chiều ngang, xuống hàng */
+          width: 250px; /* Đảm bảo input rộng bằng form */
+          margin-bottom: 20px; /* Tạo khoảng cách giữa các input */
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          outline: none;
+          padding: 7px 0;
+        }
+      }
+      .forgot-pass {
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      button {
+        border: none;
+        background: rgb(137, 205, 250);
+        border-radius: 7px;
+        padding: 8px 0;
+      }
+    }
+    .c-sign-up {
+      opacity: 0.6;
+      padding-top: 5px;
+      .sign-up {
+        cursor: pointer;
+        color: rgb(37, 156, 253);
+      }
+    }
+  }
+}

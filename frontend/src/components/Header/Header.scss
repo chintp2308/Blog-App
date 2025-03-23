@@ -1,0 +1,21 @@
+.container-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background: rgb(218, 245, 253);
+  .title-blog {
+    font-size: 30px;
+    padding-left: 50px;
+    cursor: pointer;
+  }
+  .btn-blog {
+    margin-left: auto;
+    button {
+      padding: 5px 17px;
+      margin-right: 50px;
+      border: none;
+      border-radius: 5px;
+      background: rgb(137, 205, 250);
+    }
+  }
+}

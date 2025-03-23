@@ -1,0 +1,45 @@
+.container-detail-blog {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 30px;
+  .title-detail {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  .img-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+      width: 700px;
+    }
+  }
+  .author-date {
+    opacity: 0.5;
+  }
+  .btn-detail {
+    display: flex;
+    gap: 10px;
+    margin-left: auto;
+    button {
+      padding: 5px 17px;
+      margin: 20px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    .delete-detail {
+      background: rgb(250, 96, 96);
+    }
+    .edit-detail {
+      background: orange;
+    }
+    .come-back-detail {
+      background: rgb(137, 205, 250);
+    }
+  }
+}

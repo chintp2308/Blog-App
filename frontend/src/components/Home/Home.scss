@@ -1,0 +1,80 @@
+.container-home {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 30px;
+  .add-search {
+    display: flex;
+    .btn-add-blog {
+      button {
+        background: rgb(218, 245, 253);
+        border: none;
+        border-radius: 20px;
+        padding: 7px 20px;
+        &:hover {
+          background: rgb(137, 205, 250);
+        }
+      }
+    }
+    .search-blog {
+      height: 50px;
+      width: 500px;
+      border: 1px solid #e6e6e6;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      border-radius: 30px;
+      background: rgb(218, 245, 253);
+      margin-left: auto;
+
+      .title-search {
+        padding-left: 15px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: transparent;
+        outline: none;
+      }
+      .search-button {
+        margin-left: auto;
+        margin-right: 10px;
+        border: none;
+        background: transparent;
+      }
+    }
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap; //xuống dòng khi không đủ không gian
+    gap: 30px;
+    padding-top: 15px;
+
+    .card {
+      width: 350px;
+      height: 350px;
+      border: 1px solid #333;
+
+      .title-1 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-left: 10px;
+      }
+      .title-2 {
+        padding: 10px 0;
+        margin-left: 10px;
+      }
+      button {
+        background: rgb(137, 205, 250);
+        border: none;
+        border-radius: 5px;
+        margin: 10px 100px;
+        padding: 5px;
+      }
+      .card-image {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.container-add-bog {
+  padding: 40px;
+  .content-title {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 50px;
+  }
+  .content-body {
+    .form-group {
+      padding-bottom: 15px;
+      display: flex;
+      gap: 10px;
+
+      .description-input {
+        height: 80px;
+        width: 100%;
+      }
+    }
+    .preview-image-container {
+      display: flex; /* Căn giữa nội dung nếu cần */
+      gap: 10px;
+      .image-new-blog {
+        // padding-bottom: 15px;
+        // display: flex;
+        // gap: 10px;
+        cursor: pointer;
+      }
+      .preview-image {
+        border: 1px solid #ccc;
+        width: 350px;
+      }
+    }
+  }
+  button {
+    padding: 5px 17px;
+    margin: 20px 10px 0 0;
+    border: none;
+    border-radius: 5px;
+    background: rgb(137, 205, 250);
+  }
+}

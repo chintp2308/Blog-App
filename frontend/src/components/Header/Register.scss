@@ -1,0 +1,54 @@
+.container-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+
+  .register {
+    height: 500px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    //   justify-content: center;
+    align-items: center;
+    .title-register {
+      font-size: 30px;
+      font-weight: 600;
+      padding: 50px 0 30px 0;
+      color: rgb(137, 205, 250);
+    }
+    .content-register {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      .form-register {
+        input {
+          display: block; /* Mỗi input chiếm toàn bộ chiều ngang, xuống hàng */
+          width: 300px; /* Đảm bảo input rộng bằng form */
+          margin-bottom: 20px; /* Tạo khoảng cách giữa các input */
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          outline: none;
+          padding: 7px 0;
+        }
+      }
+
+      button {
+        border: none;
+        background: rgb(137, 205, 250);
+        border-radius: 7px;
+        padding: 8px 0;
+      }
+    }
+    .c-login {
+      opacity: 0.6;
+      padding-top: 5px;
+      .login {
+        cursor: pointer;
+        color: rgb(37, 156, 253);
+      }
+    }
+  }
+}
