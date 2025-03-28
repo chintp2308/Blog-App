@@ -1,39 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/img/logo192.png";
 import "./DetailBlogApp.scss";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { getDeleteBlog, getDetailBlog } from "../../services/apiServices";
+import { useParams } from "react-router-dom";
+import { Buffer } from "buffer";
+import { toast } from "react-toastify";
 
-const DetailBlogApp = () => {
+const DetailBlogApp = (prop) => {
   const history = useHistory();
+  const [detailBlog, setDetailBlog] = useState([]);
+  const { id } = useParams();
+  const getDetailPost = async () => {
+    const res = await getDetailBlog(id);
+    setDetailBlog([res.data]);
+  };
+
+  useEffect(() => {
+    getDetailPost();
+  }, [id]);
+
+  const handleClickDelete = async (data) => {
+    const res = await getDeleteBlog(data);
+    if (res && res.errCode === 0) {
+      toast.success(res.errMessage);
+      history.push("/");
+    } else {ok 
+      toast.error(res.errMessage);
+    }
+  };
+
   return (
     <div className="container-detail-blog">
-      <div className="title-detail">Cách để Lập trình</div>
-      <div className="img-detail">
-        <img src={logo}></img>
-      </div>
-      <div className="author-date">Tác giả: User| Ngày đăng: 27/12/2025</div>
+      {detailBlog &&
+        detailBlog.length > 0 &&
+        detailBlog.map((item, index) => {
+          let imageBase64 = "";
+          if (item.image) {
+            imageBase64 = new Buffer(item.image, "base64").toString("binary");
+          }
 
-      <div>
-        Khi mà công nghệ ngày càng trở nên dễ tiếp cận, nhu cầu dành cho lập
-        trình viên cũng ngày một tăng cao. Lập trình là kỹ năng được trau dồi và
-        hoàn thiện theo thời gian. Dù vậy, bất kỳ ai cũng phải trải qua bước
-        khởi đầu nhất định. Có vô số ngôn ngữ phù hợp với người mới bắt đầu, bất
-        kể lĩnh vực mà họ chọn (ví dụ. JavaScript, v.v... JavaScript tương đối
-        cao, do đó bạn hãy bắt đầu với HTML hoặc CSS). Hãy tham khảo tiếp để bắt
-        đầu với công cuộc học lập trình của bạn.
-      </div>
-      <div className="btn-detail">
-        <button className="delete-detail">Xoá</button>
-        <button
-          className="edit-detail"
-          onClick={() => history.push("/edit-detail")}
-        >
-          Sửa
-        </button>
-        <button className="come-back-detail" onClick={() => history.push("/")}>
-          Quay lại
-        </button>
-      </div>
+          return (
+            <div>
+              <div className="title-detail">{item.title}</div>
+              <div className="img-detail">
+                <img src={imageBase64}></img>
+              </div>
+              <div className="author-date">
+                Tác giả: User| Ngày đăng: 27/12/2025
+              </div>
+
+              <div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: item.contentHTML }}
+                ></div>
+              </div>
+              <div className="btn-detail">
+                <button
+                  className="delete-detail"
+                  onClick={() => handleClickDelete(item)}
+                >
+                  Xoá
+                </button>
+                <button
+                  className="edit-detail"
+                  onClick={() => history.push("/edit-detail")}
+                >
+                  Sửa
+                </button>
+                <button
+                  className="come-back-detail"
+                  onClick={() => history.push("/")}
+                >
+                  Quay lại
+                </button>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 };

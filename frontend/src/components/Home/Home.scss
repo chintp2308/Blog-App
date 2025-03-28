@@ -50,9 +50,14 @@
     padding-top: 15px;
 
     .card {
-      width: 350px;
-      height: 350px;
-      border: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 380px;
+      height: 500px;
+      border: none;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+      position: relative;
 
       .title-1 {
         font-size: 20px;
@@ -64,16 +69,19 @@
         margin-left: 10px;
       }
       button {
+        position: absolute;
         background: rgb(137, 205, 250);
         border: none;
         border-radius: 5px;
-        margin: 10px 100px;
-        padding: 5px;
+        padding: 5px 10px;
+        bottom: 10px;
+        left: 10px;
       }
       .card-image {
         width: 100%;
-        height: 200px;
+        height: 300px;
         border-radius: 10px;
+        object-fit: cover;
       }
     }
   }

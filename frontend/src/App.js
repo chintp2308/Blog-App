@@ -4,11 +4,13 @@ import "react-toastify/dist/ReactToastify.css";
 import _ from "lodash";
 import AppRoutes from "./routes/AppRoutes";
 import Header from "./components/Header/Header";
+import "./App.scss";
+import "react-image-lightbox/style.css";
 function App() {
   return (
     <>
       <Router>
-        <>
+        <div className="container">
           <div className="app-header">
             <Header />
           </div>
@@ -16,7 +18,7 @@ function App() {
             <AppRoutes />
           </div>
           <div className="app-footer"></div>
-        </>
+        </div>
       </Router>
       <ToastContainer
         position="top-right"

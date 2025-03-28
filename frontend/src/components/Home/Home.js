@@ -2,11 +2,33 @@ import "./Home.scss";
 import logo from "../../assets/img/logo192.png";
 import { CiSearch } from "react-icons/ci";
 import { MdAddCircleOutline } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { getAllBlog } from "../../services/apiServices";
+import { toast } from "react-toastify";
+import { Buffer } from "buffer";
 const Home = () => {
   const history = useHistory();
+
+  const [listBlog, setListBlog] = useState([]);
+
+  const getAllPost = async () => {
+    const res = await getAllBlog();
+    if (res && res.errCode === 0) {
+      toast.success(res.errMessage);
+      setListBlog(res.data);
+    } else {
+      toast.error(res.errMessage);
+    }
+  };
+
+  useEffect(() => {
+    getAllPost();
+  }, []);
+
+  const handleViewDetailPost = (data) => {
+    history.push(`/detail/${data.id}`);
+  };
 
   return (
     <div className="container-home">
@@ -33,12 +55,24 @@ const Home = () => {
       </div>
 
       <div className="cards">
-        <div className="card">
-          <img src={logo} className="card-image" />
-          <div className="title-1">Hành trình khám phá sức khoẻ</div>
-          <div className="title-2">Bí quyết</div>
-          <button onClick={() => history.push("/detail-blog")}>Chi tiết</button>
-        </div>
+        {listBlog &&
+          listBlog.length > 0 &&
+          listBlog.map((item, index) => {
+            let imageBase64 = "";
+            if (item.image) {
+              imageBase64 = new Buffer(item.image, "base64").toString("binary");
+            }
+            return (
+              <div className="card" key={index}>
+                <img src={imageBase64} className="card-image" />
+                <div className="title-1">{item.title}</div>
+                <div className="title-2">{item.description}</div>
+                <button onClick={() => handleViewDetailPost(item)}>
+                  Chi tiết
+                </button>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
