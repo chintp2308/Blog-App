@@ -6,11 +6,15 @@ import { getDeleteBlog, getDetailBlog } from "../../services/apiServices";
 import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
 import { toast } from "react-toastify";
+import DeleteVerify from "./DeleteVerify";
 
 const DetailBlogApp = (prop) => {
   const history = useHistory();
   const [detailBlog, setDetailBlog] = useState([]);
   const { id } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [blogToDelete, setBlogToDelete] = useState(null);
+
   const getDetailPost = async () => {
     const res = await getDetailBlog(id);
     setDetailBlog([res.data]);
@@ -20,14 +24,15 @@ const DetailBlogApp = (prop) => {
     getDetailPost();
   }, [id]);
 
-  const handleClickDelete = async (data) => {
-    const res = await getDeleteBlog(data);
+  const handleClickDelete = async () => {
+    const res = await getDeleteBlog(blogToDelete);
     if (res && res.errCode === 0) {
       toast.success(res.errMessage);
       history.push("/");
-    } else {ok 
+    } else {
       toast.error(res.errMessage);
     }
+    setIsModalOpen(false);
   };
 
   return (
@@ -58,13 +63,16 @@ const DetailBlogApp = (prop) => {
               <div className="btn-detail">
                 <button
                   className="delete-detail"
-                  onClick={() => handleClickDelete(item)}
+                  onClick={() => {
+                    setBlogToDelete(item);
+                    setIsModalOpen(true);
+                  }}
                 >
                   Xoá
                 </button>
                 <button
                   className="edit-detail"
-                  onClick={() => history.push("/edit-detail")}
+                  onClick={() => history.push(`/edit-detail/${item.id}`)} // Pass blog ID to edit page
                 >
                   Sửa
                 </button>
@@ -78,6 +86,14 @@ const DetailBlogApp = (prop) => {
             </div>
           );
         })}
+      {isModalOpen && (
+        <DeleteVerify
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onConfirm={handleClickDelete}
+          blogToDelete={blogToDelete}
+        />
+      )}
     </div>
   );
 };
