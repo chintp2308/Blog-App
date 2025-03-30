@@ -14,6 +14,7 @@ const DetailBlogApp = (prop) => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
+  // const [isUpdate, setIsUpdate] = useState(false);
 
   const getDetailPost = async () => {
     const res = await getDetailBlog(id);

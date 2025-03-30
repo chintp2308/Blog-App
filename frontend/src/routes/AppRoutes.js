@@ -20,7 +20,7 @@ const AppRoutes = (props) => {
           <CreateNewBlog />
         </Route>
         <Route exact path="/detail/:id" component={DetailBlogApp} />
-        <Route path="/edit-detail">
+        <Route path="/edit-detail/:id" component={EditBlog}>
           <EditBlog />
         </Route>
         <Route path="/login">
