@@ -20,4 +20,15 @@ const getDeleteBlog = (inputId) => {
 const putUpdateBlog = (data) => {
   return axios.put("http://localhost:8081/api/update", data);
 };
-export { getAllBlog, getAddBlog, getDetailBlog, getDeleteBlog, putUpdateBlog };
+
+const getSearchBlog = (value) => {
+  return axios.get(`http://localhost:8081/api/search?searchTerm=${value}`);
+};
+export {
+  getAllBlog,
+  getAddBlog,
+  getDetailBlog,
+  getDeleteBlog,
+  putUpdateBlog,
+  getSearchBlog,
+};

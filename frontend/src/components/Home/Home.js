@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { MdAddCircleOutline } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { getAllBlog } from "../../services/apiServices";
+import { getAllBlog, getSearchBlog } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { Buffer } from "buffer";
 const Home = () => {
@@ -30,6 +30,18 @@ const Home = () => {
     history.push(`/detail/${data.id}`);
   };
 
+  const handleOnChangeSearch = async (event) => {
+    const res = await getSearchBlog(event.target.value.trim());
+    setListBlog(res.data);
+
+    // if (res && res.errCode === 0) {
+    //   toast.success(res.errMessage);
+    //   setListBlog(res.data);
+    // } else {
+    //   toast.error(res.errMessage);
+    // }
+  };
+
   return (
     <div className="container-home">
       <div className="add-search">
@@ -44,6 +56,9 @@ const Home = () => {
             type="text"
             className="title-search"
             placeholder="Tìm kiếm bài kiếm..."
+            onChange={(event) => {
+              handleOnChangeSearch(event);
+            }}
           />
           {/* <a className="icon-search">
           <CiSearch />
