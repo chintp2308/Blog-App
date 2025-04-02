@@ -24,6 +24,11 @@ const putUpdateBlog = (data) => {
 const getSearchBlog = (value) => {
   return axios.get(`http://localhost:8081/api/search?searchTerm=${value}`);
 };
+
+const postLogin = (email, password) => {
+  return axios.post("http://localhost:8081/api/login", { email, password });
+};
+
 export {
   getAllBlog,
   getAddBlog,
@@ -31,4 +36,5 @@ export {
   getDeleteBlog,
   putUpdateBlog,
   getSearchBlog,
+  postLogin,
 };

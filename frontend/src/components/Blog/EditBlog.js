@@ -58,9 +58,6 @@ const EditBlog = (props) => {
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      // const imageUrl = URL.createObjectURL(file);
-      // console.log("Image URL:", imageUrl);
-      // setImage(imageUrl);
       const url = await CommonUtils.getBase64(file);
       setImage(url);
     }
@@ -81,7 +78,6 @@ const EditBlog = (props) => {
 
   const handeClickImage = () => {
     setIsImageOpen(true);
-    // console.log("Image URL:", image);
   };
 
   return (
@@ -108,17 +104,8 @@ const EditBlog = (props) => {
             hidden
             onChange={handleImageChange}
           />
-          <div
-            className="preview-image"
-            // style={{ backgroundImage: `url(${image || ""}) ` }}
-          >
-            {image && (
-              <img
-                src={image}
-                // alt="Preview"
-                onClick={handeClickImage}
-              />
-            )}
+          <div className="preview-image">
+            {image && <img src={image} onClick={handeClickImage} />}
           </div>
         </div>
         <div className="col-6 form-group">
@@ -153,7 +140,7 @@ const EditBlog = (props) => {
       </button>
       <button
         onClick={() => {
-          history.push("/detail/" + id);
+          history.push(`/detail/${id}`); // Redirect to the detail page of the blog
         }}
       >
         Close

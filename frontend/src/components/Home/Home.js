@@ -7,18 +7,26 @@ import { useHistory } from "react-router-dom";
 import { getAllBlog, getSearchBlog } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { Buffer } from "buffer";
+import { set } from "lodash";
 const Home = () => {
   const history = useHistory();
 
   const [listBlog, setListBlog] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getAllPost = async () => {
     const res = await getAllBlog();
-    if (res && res.errCode === 0) {
-      toast.success(res.errMessage);
-      setListBlog(res.data);
-    } else {
+    // if (res && res.errCode === 0) {
+    //   toast.success(res.errMessage);
+    //   setListBlog(res.data);
+    // } else {
+    //   toast.error(res.errMessage);
+    // }
+    if (res && res.errCode !== 0) {
       toast.error(res.errMessage);
+      setListBlog([]);
+    } else {
+      setListBlog(res.data);
     }
   };
 
@@ -31,15 +39,23 @@ const Home = () => {
   };
 
   const handleOnChangeSearch = async (event) => {
-    const res = await getSearchBlog(event.target.value.trim());
-    setListBlog(res.data);
-
-    // if (res && res.errCode === 0) {
-    //   toast.success(res.errMessage);
-    //   setListBlog(res.data);
-    // } else {
-    //   toast.error(res.errMessage);
-    // }
+    const value = event.target.value.trim().toLowerCase();
+    // setSearchTerm(value);
+    if (value) {
+      setSearchTerm(value);
+    } else {
+      const res = await getAllBlog();
+      setListBlog(res.data);
+    }
+  };
+  const handleSearch = async () => {
+    const res = await getSearchBlog(searchTerm);
+    if (res && res.errCode === 0) {
+      toast.success(res.errMessage);
+      setListBlog(res.data);
+    } else {
+      toast.error(res.errMessage);
+    }
   };
 
   return (
@@ -59,11 +75,19 @@ const Home = () => {
             onChange={(event) => {
               handleOnChangeSearch(event);
             }}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") handleSearch();
+            }}
           />
           {/* <a className="icon-search">
           <CiSearch />
         </a> */}
-          <button className="search-button">
+          <button
+            onClick={() => {
+              handleSearch();
+            }}
+            className="search-button"
+          >
             <CiSearch />
           </button>
         </div>

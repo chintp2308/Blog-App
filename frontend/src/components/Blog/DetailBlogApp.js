@@ -14,7 +14,6 @@ const DetailBlogApp = (prop) => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
-  // const [isUpdate, setIsUpdate] = useState(false);
 
   const getDetailPost = async () => {
     const res = await getDetailBlog(id);
@@ -65,6 +64,7 @@ const DetailBlogApp = (prop) => {
                 <button
                   className="delete-detail"
                   onClick={() => {
+                    // handleClickDelete(item);
                     setBlogToDelete(item);
                     setIsModalOpen(true);
                   }}
@@ -73,7 +73,7 @@ const DetailBlogApp = (prop) => {
                 </button>
                 <button
                   className="edit-detail"
-                  onClick={() => history.push(`/edit-detail/${item.id}`)} // Pass blog ID to edit page
+                  onClick={() => history.push("/edit-detail")}
                 >
                   Sửa
                 </button>
@@ -92,7 +92,6 @@ const DetailBlogApp = (prop) => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onConfirm={handleClickDelete}
-          blogToDelete={blogToDelete}
         />
       )}
     </div>
