@@ -255,8 +255,8 @@ const handleRegister = async (data) => {
       await db.User.create({
         email: data.email,
         password: data.password,
-        firstName: data.firstname,
-        lastName: data.lastname,
+        firstName: data.firstName,
+        lastName: data.lastName,
       });
       return {
         errCode: 0,

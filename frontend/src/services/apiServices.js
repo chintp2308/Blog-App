@@ -28,6 +28,14 @@ const getSearchBlog = (value) => {
 const postLogin = (email, password) => {
   return axios.post("http://localhost:8081/api/login", { email, password });
 };
+const postRegister = (firstName, lastName, email, password) => {
+  return axios.post("http://localhost:8081/api/register", {
+    firstName,
+    lastName,
+    email,
+    password,
+  });
+};
 
 export {
   getAllBlog,
@@ -37,4 +45,5 @@ export {
   putUpdateBlog,
   getSearchBlog,
   postLogin,
+  postRegister,
 };
